@@ -1,0 +1,17 @@
+fr:
+  already_with_name: "%{name} est déjà enregistré(e)"
+  company_self_main: La compagnie ne peut pas être sa propre compagnie principale
+  invalid_credential: Authentification invalide
+  invalid_login: Le nom d'utilisateur ou le mot de passe est incorrect
+  invalid_role: Le rôle de l'utilisateur ne permet pas de faire la requète
+  invalid_router_parameter: "Paramètre invalide : l'exigence et la série doivent avoir le même router"
+  maximum_files_exceeded: "Le nombre maximum de fichiers %{max_file_allowed} a été dépassé."
+  maximum_files_length_exceeded : "%{filename} (%{size}): la taille du fichier a dépassé la taille maximale de %{max_file_size_mb} Mo."
+  not_found_with_name: "%{name} n'a pas été trouvé(e)"
+  unconform_files_extension:  "%{filename}: l'extension du fichier '%{file_extension}' n'est pas supporté par la requête (doit être un .json ou .xml)."
+  user_delete_self: L'utilisateur ne peut pas se supprimer lui même
+  user_not_found: L'utilisateur n'est pas créé, veuillez contacter un administrateur
+  user_self: L'utilisateur ne peut pas changer ses privilège lui-même
+  wrong_file_company: Le fichier n'est pas tagué pour cette company
+  wrong_file_type: Mauvaise extension du fichier
+  wrong_uri: "Le format de l'uri s3 semble incorrect: %{params_s3_uri}"

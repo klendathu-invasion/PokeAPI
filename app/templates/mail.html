@@ -1,0 +1,73 @@
+{# templates/mail.html #}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Alert from OneSPC</title>
+    <link href="{{ app_uri }}/css/mail.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="title_container">
+        <img src="{{ app_uri }}/public/img/logo.png" alt="Local Image" class="logo_container" />
+        <div class="subtitle_container">
+            <h1 class="textTitle_container">Alert from OneSPC</h1>
+            <p class="titleDescription_container">{{ SUBJECT }}</h1>
+        </div>
+    </div>
+    <div class="warnings_container">
+        <img src="{{ app_uri }}/public/img/warning.png" alt="Local Image"/>
+        <h2 class="warnings_content">{{ alert_queue|length }} Warnings triggered</h2>
+    </div>
+    <table>
+        <caption>triggered caracteristic(s) to classify</caption>
+        <tr>
+            <th scope="col"> Date </th>
+            <th scope="col"> Part number </th>
+            <th scope="col"> Serial </th>
+            <th scope="col"> OF </th>
+            <th scope="col"> Operation </th>
+            <th scope="col"> Caracteristic </th>
+            <th scope="col"> Name </th>
+            <th scope="col"> Value </th>
+            <th scope="col"> Reason </th>
+            <th scope="col"> Lower limit </th>
+            <th scope="col"> Upper limit </th>
+            <th scope="col"> Link </th>
+        </tr>
+        {% for alert_reason in alert_queue %}
+        <tr>
+            <td> {{ alert_reason.parameter.date_create }} </td>
+            <td> {{ alert_reason.parameter.requirement.step.operation.router.product.part_number }} </td>
+            <td> {{ alert_reason.parameter.serial_reference }} </td>
+            <td> {{ alert_reason.parameter.job_order_external_reference }} </td>
+            <td> {{ alert_reason.parameter.requirement.step.operation.number }} </td>
+            <td>{{ alert_reason.parameter.requirement.name }}</td>
+            <td> {{ alert_reason.parameter.name }} </td>
+            <td> {{ alert_reason.parameter.value }} </td>
+            <td class="reason_td"> {{ alert_reason.reason }} </td>
+            {% if 'tolerance' in alert_reason.reason %}
+            <td> {{ alert_reason.parameter.lower_limit }} </td>
+            <td> {{ alert_reason.parameter.upper_limit }} </td>
+            {% else %}
+            <td> {{ alert_reason.parameter.requirement.lower_limit }} </td>
+            <td> {{ alert_reason.parameter.requirement.upper_limit }} </td>
+            {% endif %}
+            <td> **link** </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div>
+        L'application stocke votre adresse e-mail afin de pouvoir vous envoyer des alertes en cas de
+        non-conformité ou de dérive de production des pièces vous concernant. La fourniture de ces données est
+        nécessaire à la réalisation du service d'alertes. Ces données seront supprimées 3 mois après
+        l'échéances de l'alerte. Vous disposez de droits d'accès, de rectification, d'effacement, de limitation et de
+        portabilité ainsi qu'un droit d'opposition que vous pouvez exercer en contactant le Délégué à la protection des
+        données personnelles Safran Nacelles : dpo.sna@gmail.com. Vous pouvez aussi déposer plainte auprès
+        de l'autorité française de contrôle des données (<a href="https://www.cnil.fr">https://www.cnil.fr</a>).
+    </div>
+    <hr>
+</body>
+
+</html>

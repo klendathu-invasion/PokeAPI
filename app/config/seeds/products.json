@@ -1,0 +1,42 @@
+{
+  "number": 30,
+  "others": [
+    {
+      "description": "Un objet qui sert \u00e0 se nettoyer les dents",
+      "name": "Brosse \u00e0 dents",
+      "price": 3.45,
+      "shop_id": 1
+    },
+    {
+      "description": "Un objet pour lire",
+      "name": "Livre",
+      "price": 10.95,
+      "shop_id": 2
+    },
+    {
+      "description": "Pour d\u00e9corer l'appartement",
+      "name": "Meuble",
+      "price": 167.65,
+      "shop_id": 3
+    }
+  ],
+  "values": [
+    {
+      "description": "[FAKE_DESCRIPTION]",
+      "fake_random_float": [
+        {
+          "key": "price",
+          "max": 1000
+        }
+      ],
+      "fake_random_int": [
+        {
+          "key": "shop_id",
+          "max": 20,
+          "min": 1
+        }
+      ],
+      "name": "[FAKE_NAME]"
+    }
+  ]
+}

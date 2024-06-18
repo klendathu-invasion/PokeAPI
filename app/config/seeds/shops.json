@@ -1,0 +1,33 @@
+{
+  "number": 30,
+  "others": [
+    {
+      "description": "Un magasin pour prendre soin de soi",
+      "name": "Pharmacie",
+      "user_id": 1
+    },
+    {
+      "description": "Un magasin pour la culture",
+      "name": "Culturama",
+      "user_id": 2
+    },
+    {
+      "description": "Un magasin pour d\u00e9corer sa maison",
+      "name": "Conforama",
+      "user_id": 3
+    }
+  ],
+  "values": [
+    {
+      "description": "[FAKE_DESCRIPTION]",
+      "fake_random_int": [
+        {
+          "key": "user_id",
+          "max": 20,
+          "min": 1
+        }
+      ],
+      "name": "[FAKE_NAME]"
+    }
+  ]
+}

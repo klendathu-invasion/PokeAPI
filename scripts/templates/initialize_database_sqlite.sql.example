@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS users (
+	id INTEGER NOT NULL,
+	matricule TEXT NOT NULL,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+	email TEXT NOT NULL,
+	last_connection_at TIMESTAMP,
+	legals_at TIMESTAMP,
+	legals_version TEXT,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS admins (
+	user_id INTEGER NOT NULL,
+	PRIMARY KEY (user_id),
+	UNIQUE (user_id),
+	CONSTRAINT fk_user_admin_u FOREIGN KEY(user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS products (
+	id INTEGER NOT NULL,
+	part_number TEXT NOT NULL,
+	description TEXT,
+	company_id INTEGER NOT NULL,
+	PRIMARY KEY (id),
+	CONSTRAINT fk_product_c FOREIGN KEY(company_id) REFERENCES companies (id) ON DELETE CASCADE
+);
+
+PRAGMA foreign_keys=ON;

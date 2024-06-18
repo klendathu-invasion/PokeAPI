@@ -1,0 +1,17 @@
+en:
+  already_with_name: "%{name} already registered"
+  company_self_main: Company can't be the main company of itself
+  invalid_credential: Invalid authentication credentials
+  invalid_login: Incorrect username or password
+  invalid_role: Invalid role user
+  invalid_router_parameter: "Invalid parameter : requirement and serial have to have the same router"
+  maximum_files_exceeded: "Maximum %{max_file_allowed} files allowed."
+  maximum_files_length_exceeded : "%{filename} (%{size}): exceeds maximum file size %{max_file_size_mb} Mo."
+  not_found_with_name: "%{name} not found"
+  unconform_files_extension:  "%{filename}: The content type '%{file_extension}' isn't supported for the request (must be .json or .xml)."
+  user_delete_self: User can't delete itself
+  user_not_found: User not created, contact an admin
+  user_self: User can't change privilege of itself
+  wrong_file_company: File isn't tagged for this company
+  wrong_file_type: Wrong file type
+  wrong_uri: "s3 uri format seems wrong: %{params_s3_uri}"

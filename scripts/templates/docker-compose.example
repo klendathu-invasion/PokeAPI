@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - ../postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=[PASSWORD_DB]
+      - POSTGRES_DB=dbo
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    links:
+      - db
+    ports:
+      - "8000:8000"
+    user: "api_user:api_user"
+    volumes:
+      - ../log:/api_user/log
+      - ./app:/api_user/code/app
+
+volumes:
+  postgres_data:

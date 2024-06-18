@@ -1,0 +1,19 @@
+{
+  "number": 50,
+  "others": [
+    {
+      "email": "admin.admin@gmail.com",
+      "first_name": "[FAKE_FIRSTNAME]",
+      "last_name": "[FAKE_LASTNAME]",
+      "matricule": "d000001"
+    }
+  ],
+  "values": [
+    {
+      "email": "[FAKE_EMAIL_USER]@gmail.com",
+      "first_name": "[FAKE_FIRSTNAME]",
+      "last_name": "[FAKE_LASTNAME]",
+      "matricule": "[FAKE_MATRICULE]"
+    }
+  ]
+}

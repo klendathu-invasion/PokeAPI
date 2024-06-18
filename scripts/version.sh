@@ -1,0 +1,6 @@
+#!/bin/bash
+APP_MAJOR=0
+APP_MINOR=0
+APP_PATCH=1
+
+export APP_VERSION="${APP_MAJOR}.${APP_MINOR}.${APP_PATCH}"

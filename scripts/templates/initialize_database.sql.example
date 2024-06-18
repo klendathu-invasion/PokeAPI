@@ -1,0 +1,32 @@
+/* users */
+CREATE TABLE IF NOT EXISTS "users"  (
+    id SERIAL PRIMARY KEY,
+    "matricule" TEXT NOT NULL,
+    "first_name" TEXT NOT NULL,
+    "last_name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "last_connection_at" TIMESTAMP DEFAULT NULL,
+    "legals_at" TIMESTAMP DEFAULT NULL,
+    "legals_version" TEXT DEFAULT NULL
+);
+
+/* admin */
+CREATE TABLE IF NOT EXISTS "admins" (
+    "user_id" INT PRIMARY KEY,
+    CONSTRAINT fk_user_admin_u
+      FOREIGN KEY("user_id")
+      REFERENCES "users" (id)
+      ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS products (
+    id SERIAL PRIMARY KEY,
+    "part_number" TEXT NOT NULL,
+    "description" TEXT DEFAULT NULL,
+    company_id INT NOT NULL,
+    CONSTRAINT fk_product_c
+      FOREIGN KEY("company_id")
+      REFERENCES companies(id)
+      ON DELETE CASCADE
+);

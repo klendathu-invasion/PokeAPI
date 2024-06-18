@@ -1,0 +1,2 @@
+fr :
+  send_ingestion_files_message : "%{len_conforming_files} fichier(s) reçu(s) à ingérer."

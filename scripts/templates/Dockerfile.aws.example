@@ -1,0 +1,41 @@
+# import the fastapi image with python version 3.11
+FROM python:3.11-alpine
+
+RUN addgroup api_user
+RUN adduser -D -h /api_user -u 1000 -G api_user api_user
+
+ENV https_proxy="[HTTP_PROXY]"
+ENV http_proxy="[HTTP_PROXY]"
+RUN apk update
+RUN apk add --no-cache postgresql-libs
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
+RUN apk upgrade --no-cache libcom_err
+
+WORKDIR /api_user/code
+
+# copy the necessary files to the docker
+COPY alembic.ini /api_user/code/alembic.ini
+COPY .env /api_user/code/.env
+COPY pytest.ini /api_user/code/pytest.ini
+COPY ./requirements.txt /api_user/code/requirements.txt
+COPY ./logging.conf /api_user/code/logging.conf
+COPY ./cert /api_user/code/cert
+COPY ./migrations /api_user/code/migrations
+COPY ./openapi /api_user/code/openapi
+COPY ./sql /api_user/code/sql
+RUN mkdir -p /api_user/code/tmp
+COPY ./app /api_user/code/app
+RUN mkdir -p /api_user/log
+
+RUN chown -R api_user:api_user /api_user
+
+USER api_user
+
+RUN pip install --upgrade pip
+# install the necessary python package
+RUN pip install --no-cache-dir --upgrade -r /api_user/code/requirements.txt
+
+ENV PATH="/api_user/.local/bin/:${PATH}"
+
+# run the server
+CMD ["uvicorn", "app.main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "8000", "--workers", "5"]

@@ -1,0 +1,9 @@
+# .coveragerc to control coverage.py
+# [run]
+# branch = True
+
+[report]
+fail_under = 85
+show_missing = True
+skip_covered = True
+precision = 2

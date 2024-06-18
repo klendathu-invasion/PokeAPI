@@ -1,0 +1,37 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "back-api",
+            "image": "[ECR_IMAGE]",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/[TASK_FAMILY_NAME]",
+                    "awslogs-region": "eu-west-3",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "family": "[TASK_FAMILY_NAME]",
+    "taskRoleArn": "[TASK_ROLE_ARN]",
+    "executionRoleArn": "[EXECUTION_ROLE_ARN]",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "1024",
+    "memory": "2048"
+}

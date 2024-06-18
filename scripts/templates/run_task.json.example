@@ -1,0 +1,21 @@
+{
+    "serviceName": "[SERVICE_NAME]",
+    "taskDefinition": "[TASK_DEFINITION_ARN]",
+    "cluster": "[TASK_CLUSTER_ARN]",
+    "desiredCount": 1,
+    "capacityProviderStrategy": [
+        {
+          "capacityProvider": "FARGATE",
+          "weight": 1,
+          "base": 0
+        }
+    ],
+    "networkConfiguration":
+    {
+        "awsvpcConfiguration":
+        {
+            "subnets": ["[TASK_SUBNETS]"],
+            "securityGroups": ["[TASK_SECURITY_GROUP]"]
+        }
+    }
+}

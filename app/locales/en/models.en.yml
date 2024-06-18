@@ -1,0 +1,22 @@
+en:
+  carts:
+    name: Cart
+  products:
+    name: Product
+    attributes:
+      name: Name
+  shops:
+    name: Shop
+    attributes:
+      name: Name
+  shop_members:
+    name: Shop Member
+  users:
+    name: User
+    attributes:
+      matricule: Matricule
+      email: Email
+  wishes:
+    name: Wish
+    attributes:
+      name: Name

@@ -1,0 +1,22 @@
+fr:
+  carts:
+    name: Le panier
+  products:
+    name: Le produit
+    attributes:
+      name: Le nom
+  shops:
+    name: Le magasin
+    attributes:
+      name: Le nom
+  shop_members:
+    name: Le membre du magasin
+  users:
+    name: L'utilisateur
+    attributes:
+      matricule: Le matricule
+      email: Le courriel
+  wishes:
+    name: La liste de souhait
+    attributes:
+      name: Le nom

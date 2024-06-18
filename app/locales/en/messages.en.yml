@@ -1,0 +1,2 @@
+en :
+  send_ingestion_files_message : "%{len_conforming_files} file(s) received for processing."
