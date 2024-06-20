@@ -1,7 +1,4 @@
-import json
-import os
 import sqlite3
-import subprocess
 
 from alembic.config import Config
 from fastapi.logger import logger
@@ -34,19 +31,6 @@ class Seed(BaseModel):
         :returns: None
 
         """
-        logger.info(
-            f"====== Start connection with database : {settings.database_engine} ======"
-        )
-
-        logger.info("====== Database initialized ======")
-        alembic_cmd = ["alembic", "--raiseerr", "upgrade", "head"]
-
-        if settings.app_source == "local":
-            logger.info("Begin migration with alembic")
-            subprocess.run(alembic_cmd)
-        else:
-            subprocess.Popen(alembic_cmd)
-        logger.info("====== Migrations done ======")
 
     @classmethod
     def initialize_database(cls, engine):
@@ -57,9 +41,6 @@ class Seed(BaseModel):
 
         """
         event.listen(engine, "connect", cls._set_sqlite_pragma)
-        cls._create_database()
-        if settings.fastapi_env.value in ["dev", "test"]:
-            cls.initialize_table(engine)
 
     @staticmethod
     def initialize_table(engine) -> None:
@@ -69,27 +50,6 @@ class Seed(BaseModel):
         :returns: None
 
         """
-        with engine.connect() as conn:
-            for table in models.Base.metadata.sorted_tables:
-                tablename = str(table)
-                filename = f"app/config/seeds/{tablename}.json"
-                if (
-                    os.path.isfile(filename)
-                    and len(conn.execute(table.select()).fetchall()) == 0
-                ):
-                    if (
-                        "id" in table.columns.keys()
-                        and settings.database_engine != "sqlite"
-                    ):
-                        conn.execute(
-                            text(f"ALTER SEQUENCE {tablename}_id_seq RESTART WITH 1;")
-                        )
-                        conn.commit()
-                    logger.debug(f"EXECUTE INSERT IN {tablename}")
-                    with open(filename) as f:
-                        table_json = json.load(f, object_hook=DictHandler.parser)
-                        conn.execute(table.insert(), table_json)
-            conn.commit()
 
     @classmethod
     async def reset_database(cls, engine):

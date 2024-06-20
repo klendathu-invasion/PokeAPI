@@ -26,36 +26,39 @@ class MetadataTag(BaseModel):
         description="Endpoints related to debug data (only visible in dev mode).",
     )
 
-    __tag_admin__: _MetadataTag = _MetadataTag(
-        name="admin", description="Endpoints related to the admin part."
-    )
-
     __tag_user__: _MetadataTag = _MetadataTag(
         name="user", prefix="/users", description="Endpoints related to user data."
     )
-
-    __tag_shop__: _MetadataTag = _MetadataTag(
-        name="shop", description="Endpoints related to shop data."
+    __tag_block__: _MetadataTag = _MetadataTag(
+        name="block", prefix="/blocks", description="Endpoints related to block data."
+    )
+    __tag_serie__: _MetadataTag = _MetadataTag(
+        name="serie", prefix="/series", description="Endpoints related to serie data."
     )
 
-    __tag_product__: _MetadataTag = _MetadataTag(
-        name="product", description="Endpoints related to product data."
+    __tag_card__: _MetadataTag = _MetadataTag(
+        name="card", prefix="/cards", description="Endpoints related to cards data."
     )
 
-    __tag_shop_member__: _MetadataTag = _MetadataTag(
-        name="shop_member", description="Endpoints related to shop member data."
+    __tag_variant__: _MetadataTag = _MetadataTag(
+        name="variant",
+        prefix="/variants",
+        description="Endpoints related to variant data.",
     )
-
-    __tag_cart__: _MetadataTag = _MetadataTag(
-        name="cart", description="Endpoints related to cart data."
+    __tag_attack__: _MetadataTag = _MetadataTag(
+        name="attack",
+        prefix="/attacks",
+        description="Endpoints related to attack data.",
     )
-
-    __tag_wish__: _MetadataTag = _MetadataTag(
-        name="wish", description="Endpoints related to wish data."
+    __tag_weakness__: _MetadataTag = _MetadataTag(
+        name="weakness",
+        prefix="/weaknesss",
+        description="Endpoints related to weakness data.",
     )
-
-    __tag_visual__: _MetadataTag = _MetadataTag(
-        name="visual", description="Endpoints to test html template."
+    __tag_resistance__: _MetadataTag = _MetadataTag(
+        name="resistance",
+        prefix="/resistances",
+        description="Endpoints related to resistance data.",
     )
 
     @classmethod
@@ -67,18 +70,14 @@ class MetadataTag(BaseModel):
                 if settings.fastapi_env.value in ["dev", "test"]
                 else None
             ),
-            (
-                cls.__tag_visual__.model_dump()
-                if settings.fastapi_env.value in ["dev", "test"]
-                else None
-            ),
-            cls.__tag_admin__.model_dump(),
             cls.__tag_user__.model_dump(),
-            cls.__tag_shop__.model_dump(),
-            cls.__tag_product__.model_dump(),
-            cls.__tag_shop_member__.model_dump(),
-            cls.__tag_cart__.model_dump(),
-            cls.__tag_wish__.model_dump(),
+            cls.__tag_block__.model_dump(),
+            cls.__tag_serie__.model_dump(),
+            cls.__tag_card__.model_dump(),
+            cls.__tag_variant__.model_dump(),
+            cls.__tag_attack__.model_dump(),
+            cls.__tag_weakness__.model_dump(),
+            cls.__tag_resistance__.model_dump(),
         ]
         while None in list_tags:
             list_tags.remove(None)

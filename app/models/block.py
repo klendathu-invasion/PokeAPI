@@ -1,26 +1,28 @@
 from sqlalchemy import (
     TIMESTAMP,
-    Boolean,
     Column,
+    ForeignKey,
     Integer,
     PrimaryKeyConstraint,
     Text,
-    sql,
 )
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 
 from ..config.constants import CASCADE_ALL_DELETE
 from .base_model import BaseModel
 
 
-class User(BaseModel):
-    __tablename__ = "users"
+class Block(BaseModel):
+    __tablename__ = "blocks"
 
     id = Column(Integer, primary_key=True)
-    first_name = Column(Text, nullable=False)
-    last_name = Column(Text, nullable=False)
-    email = Column(Text, nullable=False)
+    name = Column(Text, nullable=False)
+    tag = Column(Text, nullable=False)
+    logo = Column(Text, nullable=False)
+
     updated_at = Column(TIMESTAMP)
     created_at = Column(TIMESTAMP)
+
     PrimaryKeyConstraint("id")
+
+    series = relationship("Serie", back_populates="block", cascade=CASCADE_ALL_DELETE)

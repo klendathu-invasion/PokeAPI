@@ -15,9 +15,6 @@ from .custom_base import CustomBase
 
 
 class UserBase(CustomBase):
-    matricule: Annotated[
-        str, StringConstraints(min_length=1, strip_whitespace=True)
-    ] = Field(examples=["matricule_company"])
     first_name: Annotated[
         str,
         StringConstraints(
@@ -51,40 +48,14 @@ class UserBase(CustomBase):
         examples=["prenom.nom@gmail.com"],
         description="The email of the user.",
     )
-    is_pro: bool = False
-
-    @field_validator("first_name", mode="before")
-    @classmethod
-    def first_name_transform(cls, value: str) -> str:
-        return value.title()
 
 
 class User(UserBase):
     id: int
-    legals_version: str | None = None
-    legals_at: datetime | None = None
-    last_connection_at: datetime | None = None
+    updated_at: datetime
+    created_at: datetime
     model_config = ConfigDict(from_attributes=True)
 
 
 class UserComplete(User):
-    admin: list = []
-    shop_ids: list[int] = []
-    is_admin: bool = Field(
-        default=False,
-        examples=[False],
-        description="The flag to know if user is admin or not.",
-    )
-
-    @validator(
-        "shop_ids",
-        pre=True,
-    )
-    def ids_validator(cls, value) -> list[str]:
-        return list(value)
-
-    @model_validator(mode="after")
-    @classmethod
-    def populate_is_admin(cls, user):
-        user.is_admin = len(user.admin) > 0
-        return user
+    pass

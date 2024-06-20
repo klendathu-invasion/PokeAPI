@@ -1,26 +1,32 @@
 from sqlalchemy import (
+    ARRAY,
     TIMESTAMP,
     Boolean,
     Column,
+    ForeignKey,
     Integer,
     PrimaryKeyConstraint,
     Text,
-    sql,
 )
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 
 from ..config.constants import CASCADE_ALL_DELETE
 from .base_model import BaseModel
 
 
-class User(BaseModel):
-    __tablename__ = "users"
+class Attack(BaseModel):
+    __tablename__ = "attacks"
 
     id = Column(Integer, primary_key=True)
-    first_name = Column(Text, nullable=False)
-    last_name = Column(Text, nullable=False)
-    email = Column(Text, nullable=False)
+    name = Column(Text, nullable=False)
+    effect = Column(Text, nullable=False)
+    dammage = Column(Text, nullable=True)
+
+    costs = Column(ARRAY(Integer), nullable=True)
+
     updated_at = Column(TIMESTAMP)
     created_at = Column(TIMESTAMP)
+
     PrimaryKeyConstraint("id")
+
+    # user = relationship("User", back_populates="wishes")
